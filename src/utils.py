@@ -52,3 +52,17 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
         return report
     except Exception as e:
         raise CustomException(e, sys)
+
+
+def load_object(file_path):
+    """
+    Load an object from a file using dill.
+    """
+    try:
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"The file at path {file_path} does not exist.")
+
+        with open(file_path, 'rb') as file:
+            return dill.load(file)
+    except Exception as e:
+        raise CustomException(e, sys)
